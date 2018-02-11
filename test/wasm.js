@@ -93,4 +93,32 @@ describe('wasm', function() {
     var res = run(b);
     assert.equal(await res, 5);
   });
+
+  it('should resolve all wasm imports', async function() {
+    let b = await bundle(__dirname + '/integration/wasm-import/index.js');
+
+    // assertBundleTree(b, {
+    //   name: 'index.js',
+    //   assets: [
+    //     'index.js',
+    //     'bundle-loader.js',
+    //     'bundle-url.js',
+    //     'wasm-loader.js'
+    //   ],
+    //   childBundles: [
+    //     {
+    //       type: 'wasm',
+    //       assets: ['add.wasm'],
+    //       childBundles: []
+    //     },
+    //     {
+    //       type: 'map'
+    //     }
+    //   ]
+    // });
+
+    let promise = deferred();
+    run(b, {output: promise.resolve}, {require: false});
+    assert.equal(await promise, 3);
+  });
 });

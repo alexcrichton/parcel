@@ -65,6 +65,10 @@ class Bundle {
         this
       );
 
+      if (bundle.type == 'wasm') {
+        console.log('add-bundle', bundle.name);
+        console.trace();
+      }
       this.childBundles.add(bundle);
       this.siblingBundles.add(bundle);
       this.siblingBundlesMap.set(type, bundle);
@@ -74,6 +78,10 @@ class Bundle {
   }
 
   createChildBundle(entryAsset) {
+    if (entryAsset.type == 'wasm') {
+      console.log('add-asset', entryAsset.name);
+      console.trace();
+    }
     let bundle = Bundle.createWithAsset(entryAsset, this);
     this.childBundles.add(bundle);
     return bundle;

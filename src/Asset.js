@@ -66,6 +66,7 @@ class Asset {
   }
 
   addDependency(name, opts) {
+    console.log(name, opts);
     this.dependencies.set(name, Object.assign({name}, opts));
   }
 

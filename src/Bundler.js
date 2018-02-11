@@ -420,6 +420,7 @@ class Bundler extends EventEmitter {
   }
 
   createBundleTree(asset, dep, bundle, parentBundles = new Set()) {
+    console.log('createBundleTree', asset.name);
     if (dep) {
       asset.parentDeps.add(dep);
     }
